@@ -4,10 +4,13 @@ from similarity import get_similarity_matrix
 
 common_words_threshold = 3000
 
+english_index_dir = r'croatian/index.txt'
+english_dico_dir = r'croatian/dico.txt'
+
 
 def load_words():
     words = []
-    with open(r'./index.txt', 'r') as fileReader:
+    with open(english_index_dir, 'r', encoding="utf8") as fileReader:
         for line in fileReader.readlines():
             words.append(line.strip())
     return np.array(words)
@@ -15,7 +18,7 @@ def load_words():
 
 def load_edges():
     edges = []
-    with open(r'./dico.txt', 'r') as fileReader:
+    with open(english_dico_dir, 'r') as fileReader:
         for line in fileReader.readlines():
             splitLine = line.strip().split(" ")
             if len(splitLine) == 2:
@@ -116,9 +119,9 @@ def main():
         h = reverse_mappings[j]
         if h != word_ind:
             print(i, words[h])
-        # l1 = len(edges[edges[:, 1] == h])
-        # l2 = len(edges[edges[:, 0] == h])
-        # print(i, "|", l1, " -> ", words[h], " -> ", l2, " = ", l1 + l2)
+        #     l1 = len(edges[edges[:, 1] == h])
+        #     l2 = len(edges[edges[:, 0] == h])
+        #     print(i, "|", l1, " -> ", words[h], " -> ", l2, " = ", l1 + l2)
 
 
 main()
