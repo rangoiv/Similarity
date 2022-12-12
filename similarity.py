@@ -1,5 +1,7 @@
 import numpy as np
 
+from matrix_utils import maxmul
+
 
 def get_similarity_matrix(A, B, k=100):
     Z1 = np.array([[1 for _ in range(len(A))] for _ in range(len(B))])
@@ -11,10 +13,11 @@ def get_similarity_matrix(A, B, k=100):
 
 
 def __iterate(Zk, A, B):
-    first = np.matmul(B, Zk)
-    first = np.matmul(first, A.T)
-    second = np.matmul(B.T, Zk)
-    second = np.matmul(second, A)
+    # Use np.multiply for normal similarity scores
+    first = maxmul(B, Zk)
+    first = maxmul(first, A.T)
+    second = maxmul(B.T, Zk)
+    second = maxmul(second, A)
     Zk1 = np.add(first, second)
     Zk1 = Zk1 / np.linalg.norm(Zk1)
     return Zk1

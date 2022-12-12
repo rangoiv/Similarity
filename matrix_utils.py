@@ -1,6 +1,11 @@
 import numpy as np
 
 
+def maxmul(A, B):
+    M = np.asarray([[max(A[i][k] * B[k][j] for k in range(len(B))) for j in range(len(B[0]))] for i in range(len(A))])
+    return M
+
+
 def display_matrix(M, p=2):
     for i, row in enumerate(M):
         print("%2d" % i, end=" ")
