@@ -1,5 +1,6 @@
 import numpy as np
 
+from matrix_utils import create_mapped_edges_matrix
 from similarity import get_similarity_matrix
 
 common_words_threshold = 3000
@@ -66,17 +67,6 @@ def remove_vertices(vertices_to_remove, edges):
     return np.asarray(new_edges)
 
 
-def get_edge_matrix(vertices, edges):
-    vertices_mappings = dict((j, i) for i, j in enumerate(vertices))
-    reverse_mappings = dict(enumerate(vertices))
-    n = len(vertices)
-    edges_matrix = [[0 for _ in range(n)] for _ in range(n)]
-    for i, j in edges:
-        edges_matrix[vertices_mappings[i]][vertices_mappings[j]] = 1
-    edges_matrix = np.array(edges_matrix)
-    return edges_matrix, vertices_mappings, reverse_mappings
-
-
 def input_word(words):
     word = input("Please type a word from dictionary: ")
     if word not in words:
@@ -99,7 +89,7 @@ def main():
 
     vertices, edges = get_neighborhood_graph(word_ind, edges)
 
-    edges_matrix, vertices_mappings, reverse_mappings = get_edge_matrix(vertices, edges)
+    edges_matrix, vertices_mappings, reverse_mappings = create_mapped_edges_matrix(edges, vertices)
 
     # draw_graph(vertices, words, edges)
 

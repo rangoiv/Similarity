@@ -1,10 +1,10 @@
 import numpy as np
 
 
-def get_similarity_matrix(A, B):
+def get_similarity_matrix(A, B, k=100):
     Z1 = np.array([[1 for _ in range(len(A))] for _ in range(len(B))])
     Zk = Z1
-    for i in range(100):
+    for i in range(k):
         Zk = __iterate(Zk, A, B)
         Zk = __iterate(Zk, A, B)
     return Zk

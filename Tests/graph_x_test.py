@@ -1,5 +1,6 @@
 import numpy as np
 
+from matrix_utils import display_matrix, create_edges_matrix
 from similarity import get_similarity_matrix
 
 """
@@ -15,7 +16,6 @@ o     o         o<  >o
 """
 
 A = np.array([[0, 1, 0], [0, 0, 1], [0, 0, 0]])
-n = 11
 edges = [
     (0, 2),
     (1, 2),
@@ -30,18 +30,11 @@ edges = [
     (8, 9),
     (8, 10),
 ]
-B = [[0 for _ in range(n)] for _ in range(n)]
-for i, j in edges:
-    B[i][j] = 1
-B = np.array(B)
+B = create_edges_matrix(edges)
 
 similarity_matrix = get_similarity_matrix(B, B)
 
-for i, row in enumerate(similarity_matrix):
-    print("%2d" % i, end=" ")
-    for j in row:
-        print("%.35f" % j, end= " ")
-    print()
+display_matrix(similarity_matrix, p=35)
 print("1-2: ", similarity_matrix[2, 7])
 print("1-3: ", similarity_matrix[2, 8])
 print("2-3: ", similarity_matrix[7, 8])
