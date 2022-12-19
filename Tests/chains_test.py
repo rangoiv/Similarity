@@ -1,4 +1,4 @@
-from matrix_utils import display_matrix, create_edges_matrix
+from matrix_utils import display_matrix, create_edges_matrix, maxmul
 from similarity import get_similarity_matrix
 
 """
@@ -11,8 +11,6 @@ o -> o -> o -> o -> o -> o
 
 Graph B:
 o -> o -> o -> o -> o -> o
-
-1=2, 2=7, 3=8
 """
 
 edges_1 = [
@@ -45,8 +43,8 @@ D = create_edges_matrix(edges_4)
 E = create_edges_matrix(edges_5)
 F = create_edges_matrix(edges_6)
 
-display_matrix(get_similarity_matrix(A, B))
-display_matrix(get_similarity_matrix(A, C))
-display_matrix(get_similarity_matrix(A, D))
-display_matrix(get_similarity_matrix(A, E))
-display_matrix(get_similarity_matrix(A, F))
+display_matrix(get_similarity_matrix(A, B, matmul=maxmul))
+display_matrix(get_similarity_matrix(A, C, matmul=maxmul))
+display_matrix(get_similarity_matrix(A, D, matmul=maxmul))
+display_matrix(get_similarity_matrix(A, E, matmul=maxmul))
+display_matrix(get_similarity_matrix(A, F, matmul=maxmul))

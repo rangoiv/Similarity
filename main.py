@@ -1,17 +1,18 @@
 import numpy as np
 
+from draw import draw_graph
 from matrix_utils import create_mapped_edges_matrix
 from similarity import get_similarity_matrix
 
 common_words_threshold = 3000
 
-english_index_dir = r'croatian/index.txt'
-english_dico_dir = r'croatian/dico.txt'
+english_index_dir = r'english/index.txt'
+english_dico_dir = r'english/dico.txt'
 
 
 def load_words():
     words = []
-    with open(english_index_dir, 'r', encoding="utf8") as fileReader:
+    with open(english_index_dir, 'r') as fileReader:
         for line in fileReader.readlines():
             words.append(line.strip())
     return np.array(words)
@@ -91,7 +92,7 @@ def main():
 
     edges_matrix, vertices_mappings, reverse_mappings = create_mapped_edges_matrix(edges, vertices)
 
-    # draw_graph(vertices, words, edges)
+    draw_graph(vertices, words, edges)
 
     # Method 1:
     A = np.array([[0, 1, 0], [0, 0, 1], [0, 0, 0]])
