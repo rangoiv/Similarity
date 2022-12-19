@@ -23,10 +23,16 @@ def __iterate(Zk, A, B, matmul):
     return Zk1
 
 
-def get_central_scores(B):
+def get_central_scores(similarity_matrix):
+    similarity_scores = [i[1] for i in similarity_matrix]  # Get central column of the matrix (central scores)
+    similarity_scores /= np.linalg.norm(similarity_scores)  # Normalize the vector
+    similarity_scores = [(j, i) for (i, j) in enumerate(similarity_scores)]
+    similarity_scores.sort(reverse=True)
+    return similarity_scores
+
+
+def calculate_central_scores(B):
     M = np.matmul(B.T, B) + np.matmul(B, B.T)
     eig_vals, eig_vectors = np.linalg.eig(M)
     max_eig_ind = np.argmax(eig_vals)
     return np.real(eig_vectors[:, max_eig_ind])
-
-
