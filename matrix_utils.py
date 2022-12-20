@@ -19,7 +19,7 @@ def create_edges_matrix(edges):
     n = max(max(i, j) for i, j in edges) + 1
     edges_matrix = [[0 for _ in range(n)] for _ in range(n)]
     for i, j in edges:
-        edges_matrix[i][j] = 1
+        edges_matrix[i][j] += 1
     edges_matrix = np.array(edges_matrix)
     return edges_matrix
 
@@ -33,3 +33,19 @@ def create_mapped_edges_matrix(edges, vertices):
         edges_matrix[vertices_mappings[i]][vertices_mappings[j]] = 1
     edges_matrix = np.array(edges_matrix)
     return edges_matrix, vertices_mappings, reverse_mappings
+
+
+def get_neighborhood_graph(index, edges):
+    firstCol = edges[:, 0]
+    secondCol = edges[:, 1]
+
+    vertices = np.concatenate([
+        [index],
+        firstCol[secondCol == index],
+        secondCol[firstCol == index]
+    ])
+    vertices = np.unique(np.sort(vertices))
+    vertices_set = set(vertices)
+    edges_with_ind = np.asarray([[i, j] for i, j in edges if i in vertices_set and j in vertices_set])
+
+    return vertices, edges_with_ind
