@@ -1,11 +1,12 @@
 import numpy as np
 
 from dict import load_words, load_edges, remove_common_words, input_word, display_synonyms
+from draw import draw_graph
 from matrix_utils import create_mapped_edges_matrix, get_neighborhood_graph
 from similarity import get_similarity_matrix, get_central_scores
 
-english_index_dir = r'english/index.txt'
-english_dico_dir = r'english/dico.txt'
+english_index_dir = r'croatian/index.txt'
+english_dico_dir = r'croatian/dico.txt'
 
 
 def main():

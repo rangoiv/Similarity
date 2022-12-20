@@ -3,7 +3,7 @@ import numpy as np
 
 def load_words(index_dir):
     words = []
-    with open(index_dir, 'r') as fileReader:
+    with open(index_dir, 'r', encoding='utf8') as fileReader:
         for line in fileReader.readlines():
             words.append(line.strip())
     return np.array(words)

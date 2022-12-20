@@ -19,7 +19,7 @@ def create_edges_matrix(edges):
     n = max(max(i, j) for i, j in edges) + 1
     edges_matrix = [[0 for _ in range(n)] for _ in range(n)]
     for i, j in edges:
-        edges_matrix[i][j] = 1
+        edges_matrix[i][j] += 1
     edges_matrix = np.array(edges_matrix)
     return edges_matrix
 
